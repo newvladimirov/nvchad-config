@@ -1,3 +1,6 @@
-# Example_config
+## Usage
+- Install NVChad
+- cd ~/.config/nvim/lua/custom
+- git clone this repo
 
-This can be used as an example custom config for NvChad. Do check the https://github.com/NvChad/nvcommunity
+//
