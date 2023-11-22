@@ -128,7 +128,7 @@ local plugins = {
     dependencies = {
       -- format & linting
       {
-        "jose-elias-alvarez/null-ls.nvim",
+        "nvimtools/none-ls.nvim",
         config = function()
           require "custom.configs.null-ls"
         end,
@@ -165,7 +165,7 @@ local plugins = {
     end,
   },
 
-   {
+  {
     "nvim-telescope/telescope.nvim",
     opts = function()
       local conf = require "plugins.configs.telescope"
@@ -173,7 +173,7 @@ local plugins = {
 
       return conf
     end,
-  }
+  },
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",

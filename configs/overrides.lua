@@ -45,6 +45,7 @@ M.mason = {
     "typescript-language-server",
     "deno",
     "prettier",
+    "rome",
 
     "angular_ls",
     "prisma-language-server",
