@@ -3,6 +3,9 @@ local M = {}
 
 M.general = {
   n = {
+    ["<leader>cu"] = { "<cmd> TypescriptRemoveUnused<CR>", "Remove unused TS imports" },
+    ["<leader>ci"] = { "<cmd> TypescriptAddMissingImports<CR>", "Add missing TS imports" },
+
     ["<C-h>"] = { "<cmd> NvimTmuxNavigateLeft<CR>", "window left" },
     ["<C-l>"] = { "<cmd> NvimTmuxNavigateRight<CR>", "window right" },
     ["<C-j>"] = { "<cmd> NvimTmuxNavigateDown<CR>", "window down" },
@@ -67,6 +70,12 @@ M.tabufline = {
       end,
       "Goto next buffer",
     },
+  },
+}
+
+M.telescope = {
+  n = {
+    ["<leader>fw"] = { "<cmd> Telescope live_grep_args <CR>", "Live grep args" },
   },
 }
 

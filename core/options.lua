@@ -13,6 +13,7 @@ local options = {
   shiftwidth = 4,
   tabstop = 4,
   softtabstop = 4,
+  swapfile = false
   -- smartindent = true,
 }
 

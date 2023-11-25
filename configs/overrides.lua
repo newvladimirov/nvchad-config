@@ -56,9 +56,6 @@ M.mason = {
   },
 }
 
-M.telescope = {
-    layout_strategy = "vertical"
-}
 
 -- git support in nvimtree
 M.nvimtree = {

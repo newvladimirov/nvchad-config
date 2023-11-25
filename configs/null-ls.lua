@@ -13,6 +13,7 @@ local sources = {
 
   -- cpp
   b.formatting.clang_format,
+  require "typescript.extensions.null-ls.code-actions",
 }
 --
 null_ls.setup {

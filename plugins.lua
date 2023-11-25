@@ -167,13 +167,38 @@ local plugins = {
 
   {
     "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
+    },
     opts = function()
-      local conf = require "plugins.configs.telescope"
+      local telescope = require "telescope"
+      local trouble = require "trouble.providers.telescope"
+      local config = require "plugins.configs.telescope"
+      telescope.load_extension "file_browser"
+      telescope.load_extension "live_grep_args"
+
+      config.defaults.mappings = {
+        n = {
+          ["t"] = trouble.open_with_trouble,
+        },
+      }
+
       -- conf.defaults.layout_strategy = "vertical"
 
-      return conf
+      return config
     end,
   },
+  {
+    "jose-elias-alvarez/typescript.nvim",
+    config = function()
+      require("typescript").setup {}
+    end,
+    opts = {},
+  },
+
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
