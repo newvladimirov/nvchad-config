@@ -3,6 +3,8 @@ local M = {}
 
 M.general = {
   n = {
+    -- Todo: make a duplicate line command
+    -- ["<leader>D"] = {"Iy$<cr>p"},
     ["<leader>cu"] = { "<cmd> TypescriptRemoveUnused<CR>", "Remove unused TS imports" },
     ["<leader>ci"] = { "<cmd> TypescriptAddMissingImports<CR>", "Add missing TS imports" },
 

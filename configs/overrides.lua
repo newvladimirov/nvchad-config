@@ -67,7 +67,7 @@ M.nvimtree = {
     exclude = {},
   },
   view = {
-    width = 40,
+    width = 50,
   },
   update_focused_file = {
     enable = false,

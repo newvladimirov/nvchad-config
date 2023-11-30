@@ -87,13 +87,8 @@ local plugins = {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
-      lsp = {
-        hover = {
-          enabled = false,
-        },
-        signature = {
-          enabled = false,
-        },
+      messages = {
+        enabled = false,
       },
     },
     dependencies = {
@@ -164,7 +159,15 @@ local plugins = {
       require("better_escape").setup()
     end,
   },
-
+  {
+    "folke/trouble.nvim",
+    lazy = false,
+    config = function()
+      require("trouble").setup {
+        cycle_results = false,
+      }
+    end,
+  },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -196,6 +199,7 @@ local plugins = {
     config = function()
       require("typescript").setup {}
     end,
+    lazy = false,
     opts = {},
   },
 
