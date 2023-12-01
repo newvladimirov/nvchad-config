@@ -2,31 +2,112 @@ local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
+  { "fgheng/winbar.nvim", opts = { enabled = true }, event = "BufEnter" },
+  -- {
+  --   "Wansmer/treesj", -- todo: Understand how it works
+  --   keys = { { "<leader>m", "<CMD>TSJToggle<CR>", desc = "Toggle Treesitter Join" } },
+  --   cmd = { "TSJToggle" },
+  --   opts = { use_default_keymaps = false },
+  --   init = function()
+  --     require("core.utils").load_mappings "treesj"
+  --   end,
+  -- },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter-context", -- Looks like a shit
+  --   event = "BufReadPost",
+  --   opts = {
+  --     throttle = true,
+  --     max_lines = 0,
+  --     patterns = {
+  --       default = {
+  --         "class",
+  --         "function",
+  --         "method",
+  --       },
+  --     },
+  --   },
+  -- },
   {
-    "kristijanhusak/vim-dadbod-ui",
-    opts = {},
-    dependencies = {
-      { "tpope/vim-dadbod", lazy = true },
-      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
-    },
-    cmd = {
-      "DBUI",
-      "DBUIToggle",
-      "DBUIAddConnection",
-      "DBUIFindBuffer",
-    },
-    lazy = true,
-    config = function() end,
-    init = function()
-      -- Your DBUI configuration
-      vim.g.db_ui_use_nerd_fonts = 1
+    "hiphish/rainbow-delimiters.nvim",
+    event = "BufReadPost",
+    config = function()
+      local rainbow_delimiters = require "rainbow-delimiters"
+
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [""] = rainbow_delimiters.strategy["global"],
+          vim = rainbow_delimiters.strategy["local"],
+        },
+        query = {
+          [""] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
+        },
+        highlight = {
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+        },
+      }
     end,
   },
   {
-    "alexghergh/nvim-tmux-navigation",
-    opts = {},
-    lazy = false,
+    "RRethy/vim-illuminate", -- todo: Maybe change styles
+    config = function()
+      require("illuminate").configure {
+        under_cursor = true,
+        max_file_lines = nil,
+        delay = 100,
+        providers = {
+          "lsp",
+          "treesitter",
+          "regex",
+        },
+        filetypes_denylist = {
+          "NvimTree",
+          "Trouble",
+          "Outline",
+          "TelescopePrompt",
+          "Empty",
+          "dirvish",
+          "fugitive",
+          "alpha",
+          "packer",
+          "neogitstatus",
+          "spectre_panel",
+          "toggleterm",
+          "DressingSelect",
+          "aerial",
+        },
+      }
+    end,
+    event = { "CursorHold", "CursorHoldI" },
+    dependencies = "nvim-treesitter",
   },
+  -- {
+  --   "kristijanhusak/vim-dadbod-ui", -- For DB
+  --   opts = {},
+  --   dependencies = {
+  --     { "tpope/vim-dadbod", lazy = true },
+  --     { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+  --   },
+  --   cmd = {
+  --     "DBUI",
+  --     "DBUIToggle",
+  --     "DBUIAddConnection",
+  --     "DBUIFindBuffer",
+  --   },
+  --   lazy = true,
+  --   config = function() end,
+  --   init = function()
+  --     -- Your DBUI configuration
+  --     vim.g.db_ui_use_nerd_fonts = 1
+  --   end,
+  -- },
+  { "alexghergh/nvim-tmux-navigation", opts = {}, lazy = false },
   { "nvim-pack/nvim-spectre", opts = {}, lazy = false },
   { "https://git.sr.ht/~whynothugo/lsp_lines.nvim", opts = {}, lazy = false },
   {
@@ -77,12 +158,8 @@ local plugins = {
       package_manager = "npm",
     },
   },
-  { "akinsho/toggleterm.nvim", opts = {}, lazy = false },
-  {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    opts = require("custom.configs.others").dressing,
-  },
+  { "akinsho/toggleterm.nvim", opts = {}, lazy = false }, -- Consider to remove
+  { "stevearc/dressing.nvim", event = "VeryLazy", opts = require("custom.configs.others").dressing },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -150,8 +227,6 @@ local plugins = {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
   },
-
-  -- Install a plugin
   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
